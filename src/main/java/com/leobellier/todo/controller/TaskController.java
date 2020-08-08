@@ -23,12 +23,11 @@ public class TaskController {
 
     @GetMapping("/users/{userId}/tasks")
     public List<Task> getAllTask(@PathVariable int userId) {
-        return taskService.getTasks();
+        return taskService.getTasks(userId);
     }
 
     @DeleteMapping("/users/tasks/d/{taskId}")
     public ResponseEntity<Void> deleteTask(@PathVariable int taskId) {
-        System.out.println("llego a deleteTask");
         if (taskService.deleteTaskById(taskId) != null)
             return ResponseEntity.noContent().build();
         return ResponseEntity.notFound().build();

@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    private List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
 
     public Optional<Task> findById(int id) {
         return this.tasks.stream().filter(task -> task.getId() == id).findFirst();
@@ -24,12 +24,11 @@ public class TaskService {
         tasks.add(new Task(4, "task", 1, "Learn AOP", new Date(), false));
     }
 
-    public List<Task> getTasks() {
+    public List<Task> getTasks(int userId) {
         return this.tasks;
     }
 
     public Task deleteTaskById(int taskId) {
-        System.out.println(taskId);
         Optional<Task> task = this.findById(taskId);
         task.ifPresent(value -> tasks.remove(value));
         return task.orElse(null);
